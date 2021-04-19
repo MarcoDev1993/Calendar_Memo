@@ -1,0 +1,36 @@
+td{
+    width: 100px;
+    height: 100px;    
+}
+.head{
+    width: 100px;
+    height: 40px;
+    background-color:coral
+}
+.dayFrame{
+    width: 100px;
+    height: 100px;
+    background-color: dodgerblue;
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+
+.divContent{
+    word-wrap: break-word;
+    
+}
+
+.mostly-customized-scrollbar::-webkit-scrollbar {
+    width: 2px;
+    height: 8px;
+    background-color: #aaa;
+}
+
+.mostly-customized-scrollbar::-webkit-scrollbar-thumb {
+    background: #000;
+}
+
+.toggled{
+    background-color: white;
+}

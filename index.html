@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+    
+
+    
+<div id="nav">
+    <div id="ancoreMenu">
+    <a class="nav" href="index.html">
+        Home
+    </a>
+    <a class="nav" href="calendarOOP.html">
+        Calendar
+    </a>
+</div>
+</div>
+
+<div id="form">
+    <form action="">
+        <table>
+            <tr>
+                <td class="form">
+                    <label for="">Promemoria</label>
+                </td>
+                <td class="form">
+                    <textarea id="promem"  rows="4" cols="25"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form">
+                    <label for="">Data</label>
+                </td>
+                <td class="form">
+                    <input type="date" id="data">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form">
+                    <button id="submitBtn">Memorizza promemoria</button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<script>
+function format(d){
+        var a = d.substring(0,4);
+        var m = d.substring(5,7);
+        var g = d.substring(8,10);
+        var dataFormat = g + "/" + m + "/" + a;
+        return dataFormat;
+    }
+    
+    
+    var db = openDatabase('eventi', '1.0', 'eventi', 2 * 1024 * 1024);
+    
+
+
+    db.transaction(async function (tx) {
+        tx.executeSql("CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY, titoloEvento varchar(255) NOT NULL, dataEvento date NOT NULL)");
+    });
+    
+    document.getElementById("submitBtn").addEventListener("click", ()=>{
+        var dataFormat = format(document.getElementById('data').value);
+        var sql = `INSERT INTO events (titoloEvento, dataEvento) VALUES ('${document.getElementById('promem').value}', '${dataFormat}')`;
+        alert("Inserimento avvenuto");
+        db.transaction(function (tx) {    
+        tx.executeSql(sql);
+        });
+    });
+     
+</script>
+</body>
+</html>
