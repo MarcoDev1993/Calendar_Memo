@@ -70,7 +70,9 @@
     </table>
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/giornoSett.js"></script>
+
     <script src="js/calendar.js"></script>
+
 
     <script >
 
@@ -119,6 +121,27 @@ function calendar(event){
         calendario.setAnno(e.target.value);
         calendario.setEvent(event);
         calendario.init();
+    });
+}
+
+
+function calendarModulePattern(event){
+    var d = new Date();
+    var m = "0" + (d.getMonth() + 1);
+    var a = d.getFullYear();
+
+    var calendario = Calendario.init(m, a, event);
+    var inputMonths = document.querySelector(".select");
+    var inputYears = document.getElementById("year");
+    inputMonths.addEventListener("change", (e) => {
+        //new Calendario(e.target.value, inputYears.value, event).init();
+        calendario = Calendario.init(e.target.value, inputYears.value, event);
+        
+    });
+    inputYears.addEventListener("change", (e) => {
+        //new Calendario(inputMonths.value, e.target.value, event).init();
+        calendario = Calendario.init(inputMonths.value, e.target.value, event);
+
     });
 }
 
